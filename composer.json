@@ -1,0 +1,20 @@
+{
+    "name": "Andrew Schorr's A frame",
+    "description": "Another php project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Schorr",
+            "email": "afs35mm@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "filp/whoops": ">=1.1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aframe\\": "app/"
+        }
+    }
+}
