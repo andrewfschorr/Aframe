@@ -23,6 +23,23 @@ $injector->define('Mustache_Engine', [
     ],
 ]);
 
-$injector->alias('Aframe\Template\Renderer', 'Aframe\Template\MustacheRenderer');
+$injector->delegate('Twig_Environment', function() use ($injector) {
+    $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
+    $twig = new Twig_Environment($loader);
+    return $twig;
+});
+
+$injector->alias('Aframe\Template\Renderer', 'Aframe\Template\TwigRenderer');
+$injector->alias('Aframe\Template\FrontendRenderer', 'Aframe\Template\FrontendTwigRenderer');
+
+$injector->define('Aframe\Page\FilePageReader', [
+    ':pageFolder' => __DIR__ . '/../pages',
+]);
+
+$injector->alias('Aframe\Page\PageReader', 'Aframe\Page\FilePageReader');
+$injector->share('Aframe\Page\FilePageReader');
+
+$injector->alias('Aframe\Menu\MenuReader', 'Aframe\Menu\ArrayMenuReader');
+$injector->share('Aframe\Menu\FileMenuReader');
 
 return $injector;

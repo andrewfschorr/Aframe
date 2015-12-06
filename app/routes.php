@@ -1,5 +1,8 @@
 <?php
 
 return [
-    ['GET', '/', ['Aframe\Controllers\Homepage', 'show']],
+    ['GET', '/', ['Homepage', 'show']],
+    ['GET', '/{slug}', ['Page', 'show']],
+    //['GET', '/{slug}', ['Test', 'show']],
+
 ];
