@@ -3,6 +3,7 @@
 namespace Aframe;
 
 require ROOT . '/vendor/autoload.php';
+require ROOT . '/config/config.php';
 
 $injector = include('dependencies.php');
 
@@ -46,6 +47,7 @@ $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
+        echo '404';
         $response->setContent('404 - Page not found');
         $response->setStatusCode(404);
         break;
@@ -55,7 +57,7 @@ switch ($routeInfo[0]) {
         break;
     case \FastRoute\Dispatcher::FOUND:
         $className = $routeInfo[1][0];
-        $method = $routeInfo[1][1];
+        $method = (isset($routeInfo[1][1])) ? $routeInfo[1][1]: 'index';
         $vars = $routeInfo[2];
         $class = $injector->make( __NAMESPACE__ . '\Controllers\\' . $className);
         $class->$method($vars);

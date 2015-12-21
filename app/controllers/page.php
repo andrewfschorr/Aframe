@@ -22,16 +22,16 @@ class Page
         $this->response = $response;
         $this->renderer = $renderer;
         $this->pageReader = $pageReader;
-        error_log('constructing');
     }
 
-    public function show($params)
+    public function index($params)
     {
         $slug = $params['slug'];
-        
+        var_dump($params);   
         try {
             $data['content'] = $this->pageReader->readBySlug($slug);
         } catch (InvalidPageException $e) {
+            var_dump($e);
             $this->response->setStatusCode(404);
             $this->response->setContent('404 - Page not found');
             echo $this->response->getContent();

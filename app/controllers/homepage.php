@@ -20,7 +20,7 @@ class Homepage
 
     }
 
-    public function show()
+    public function index()
     {
         $data = [
             'name' => $this->request->getParameter('name', 'stranger'),
