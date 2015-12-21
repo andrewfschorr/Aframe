@@ -9,7 +9,6 @@ AFRAME.todo = (function() {
 
     var deleteTask = function(){
         var taskId = $(this).data('id');
-        console.log(taskId);
         $.ajax({
             url: '/?id=' + taskId,
             type: 'DELETE',

@@ -15,6 +15,7 @@ class Todo
 
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
+        session_start();
         $this->request = $request;
         $this->response = $response;
         $this->renderer = $renderer;
@@ -23,11 +24,16 @@ class Todo
 
     public function index()
     {
+        if(!empty($_SESSION['error_msg'])) {
+            $error_msg = $_SESSION['error_msg'];
+            unset($_SESSION['error_msg']);
+        }
+
         $tasks = $this->db->get_tasks();
-        
         $data = [
             'tasks' => $tasks,
             'title' => 'To dos!',
+            'error' => (isset($error_msg)) ? $error_msg : null,
         ];
 
         $html = $this->renderer->render('todo', $data); 
@@ -38,9 +44,14 @@ class Todo
     public function add_task()
     {
         $task = $this->request->getParameter('task', $defaultValue = null);
-        $this->db->add_task($task);
+        if ($task) {
+            $this->db->add_task($task); 
+        } else {
+            $_SESSION['error_msg'] = 'You can\'t have a blank task!';
+        }
+
         header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit();
+        exit();    
     }
 
     public function delete_task()
