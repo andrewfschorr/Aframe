@@ -5,7 +5,7 @@ namespace Aframe\Controllers;
 use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
-use Aframe\Models\DB;
+use Aframe\Models\Task;
 
 class Todo
 {
@@ -19,7 +19,7 @@ class Todo
         $this->request = $request;
         $this->response = $response;
         $this->renderer = $renderer;
-        $this->db = new DB(DB_HOST, DB_USER, DB_PASS, DB);
+        $this->task = new Task(DB_HOST, DB_USER, DB_PASS, DB);
     }
 
     public function index()
@@ -29,7 +29,7 @@ class Todo
             unset($_SESSION['error_msg']);
         }
 
-        $tasks = $this->db->get_tasks();
+        $tasks = $this->task->get_tasks();
         $data = [
             'tasks' => $tasks,
             'title' => 'To dos!',
@@ -45,11 +45,10 @@ class Todo
     {
         $task = $this->request->getParameter('task', $defaultValue = null);
         if ($task) {
-            $this->db->add_task($task); 
+            $this->task->add_task($task); 
         } else {
             $_SESSION['error_msg'] = 'You can\'t have a blank task!';
         }
-
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit();    
     }
@@ -57,6 +56,6 @@ class Todo
     public function delete_task()
     {   
         $task_id = $this->request->getParameter('id', $defaultValue = null);
-        $this->db->delete_task($task_id);
+        $this->task->delete_task($task_id);
     }
 }

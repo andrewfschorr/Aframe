@@ -1,9 +1,12 @@
 <?php
 
 return [
-    ['GET', '/', ['Todo']],
-    ['POST', '/', ['Todo', 'add_task']],
-    ['DELETE', '/', ['Todo', 'delete_task']],
+    ['GET', '/todo', ['Todo']],
+    ['POST', '/todo', ['Todo', 'add_task']],
+    ['DELETE', '/todo', ['Todo', 'delete_task']],
+
+    ['GET', '/signup', ['User']],
+    ['POST', '/signup', ['User', 'signup']],
 
 
     ['GET', '/home', ['Homepage']],
