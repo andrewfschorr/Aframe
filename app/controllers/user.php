@@ -6,6 +6,7 @@ use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
 use Aframe\Models\Usermodel;
+use Aframe\Utils\Util;
 
 class User
 {
@@ -20,16 +21,28 @@ class User
         $this->renderer = $renderer;
     }
 
+    public function test()
+    {
+        echo 'ellO!';
+    }
+
     public function index()
     {
         session_start();
+
+        $error_msg = Util::get_session('error_msg');
+        if(!empty($error_msg)) {
+            Util::un_set_session('error_msg');
+        }
+
         $form_token = md5(uniqid('auth', true));
-        $_SESSION['form_token'] = $form_token;
+        Util::set_session('form_token', $form_token);
 
         $data = array(
-            'form_token' => $form_token
+            'form_token' => $form_token,
+            'error' => (isset($error_msg)) ? $error_msg : null,
         );
-        $html = $this->renderer->render('signup', $data); 
+        $html = $this->renderer->render('partials/signup', $data); 
         $this->response->setContent($html);
         echo $this->response->getContent(); 
     }
@@ -38,7 +51,7 @@ class User
     {
         session_start();
         $params = $this->request->getParameters();
-        if(!isset( $params['email'], $params['password'], $params['form_token']))
+        if(!$params['email'] || !$params['password'] || !$params['form_token'])
         {
             $error_msg = 'Please enter a valid username and password';
         }
@@ -67,29 +80,30 @@ class User
 
             $password = sha1($password);
             
-            $this->usermodel = new Usermodel(DB_HOST, DB_USER, DB_PASS, DB);
+            $user = new Usermodel(DB_HOST, DB_USER, DB_PASS, DB);
             
-            $new_user = $this->usermodel->make_user($email, $password);
+            
+            $results = $user->check_used_email($email);
+            if (!$results) {
+                $error_msg = 'There was a database error';
+            } else {
+                if ($results->num_rows) {
+                    $error_msg = 'That email is alrady taken, try another one';
+                } else {
+                    $new_user = $user->make_user($email, $password);        
+                    if (!$new_user) {
+                        $error_msg = 'There was an error signging up';
+                    }
+                }
+            }
+        }
 
-            echo '<pre>';
-            var_dump($new_user);
-            echo '</pre>';
-            unset( $_SESSION['form_token'] );
-
-            echo 'whooohoooo';
-            // $error_msg = 'New user added';
-            // }
-            // catch(Exception $e)
-            // {
-            //     if( $e->getCode() == 23000)
-            //     {
-            //         $error_msg = 'Username already exists';
-            //     }
-            //     else
-            //     {
-            //         $error_msg = 'We are unable to process your request. Please try again later"';
-            //     }
-            // }
+        if (isset($error_msg)) {
+            Util::set_session('error_msg', $error_msg);
+            Util::redirect_and_exit($this->request->getUri());
+        } else {
+            //Util::redirect_and_exit('/login');
+            var_dump($user);
         }
     }
 }

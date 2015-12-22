@@ -1,5 +1,12 @@
-{% extends "main.html" %}
+{% extends "/layouts/main.html" %}
 {% block content %}
+    
+    {% if error is not null %}
+        <div class="alert alert-danger">
+            <strong>Uh oh!</strong> {{error}}
+        </div>
+    {% endif %}
+    
     <h1>Signup for this bitch</h1>
     <form action="/signup" method="post">
         <div class="form-group">

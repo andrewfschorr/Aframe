@@ -38,7 +38,7 @@ class Page
             return;
         }
 
-        $html = $this->renderer->render('Page', $data);
+        $html = $this->renderer->render('partials/page', $data);
         $this->response->setContent($html);
         echo $this->response->getContent(); 
     }

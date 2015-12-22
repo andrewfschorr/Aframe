@@ -7,6 +7,7 @@ return [
 
     ['GET', '/signup', ['User']],
     ['POST', '/signup', ['User', 'signup']],
+    ['GET', '/test', ['User', 'test']],
 
 
     ['GET', '/home', ['Homepage']],

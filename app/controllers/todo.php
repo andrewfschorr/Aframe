@@ -36,7 +36,7 @@ class Todo
             'error' => (isset($error_msg)) ? $error_msg : null,
         ];
 
-        $html = $this->renderer->render('todo', $data); 
+        $html = $this->renderer->render('partials/todo', $data); 
         $this->response->setContent($html);
         echo $this->response->getContent(); 
     }
