@@ -6,12 +6,12 @@ class Test
 {
     public function __construct()
     {
-        echo 'we constructing!';
+        error_log('we constructing!');
     }
 
     public function index()
     {
-        echo 'indexing';   
+        error_log('indexing');   
         
     }
 }

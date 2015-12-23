@@ -16,10 +16,10 @@ class User extends Auth_User
 
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
+        parent::__construct();
         $this->request = $request;
         $this->response = $response;
         $this->renderer = $renderer;
-        parent::__construct();
     }
 
     public function show_login()
