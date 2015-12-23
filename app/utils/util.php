@@ -2,6 +2,8 @@
 
 namespace Aframe\Utils;
 
+session_start();
+
 class Util
 {
     public static function redirect_and_exit($url)

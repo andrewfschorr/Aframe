@@ -11,8 +11,8 @@
         <h3>user id is {{user_id}} and email is {{email}}</h3>
     {% endif %}
     
-    <h1>Signup for this bitch</h1>
-    <form action="/signup" method="post">
+    <h1>Login!</h1>
+    <form action="/login" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" name="email" maxlength="30" placeholder="Email">
@@ -21,7 +21,6 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" maxlength="30" placeholder="Password">
         </div>
-        <input type="hidden" name="form_token" value="{{form_token}}"/>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 {% endblock %}

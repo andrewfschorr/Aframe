@@ -19,7 +19,7 @@ class Todo
         $this->request = $request;
         $this->response = $response;
         $this->renderer = $renderer;
-        $this->task = new Task(DB_HOST, DB_USER, DB_PASS, DB);
+        $this->task = new Task();
     }
 
     public function index()

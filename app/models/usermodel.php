@@ -4,9 +4,9 @@ namespace Aframe\Models;
 
 class Usermodel extends DB
 {
-    public function __construct($db_host, $db_user, $db_pass, $db)
+    public function __construct()
     {
-        parent::__construct($db_host, $db_user, $db_pass, $db);
+        parent::__construct();
     }
 
     public function make_user($email, $password)
@@ -17,5 +17,10 @@ class Usermodel extends DB
     public function check_used_email($email)
     {
         return $this->connection->query("SELECT * FROM users WHERE email = '$email'");
+    }
+
+    public function find_user($email)
+    {
+        return $this->connection->query("SELECT * FROM users WHERE email = '$email'");   
     }
 }

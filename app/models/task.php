@@ -4,9 +4,9 @@ namespace Aframe\Models;
 
 class Task extends DB
 {
-    public function __construct($db_host, $db_user, $db_pass, $db)
+    public function __construct()
     {
-        parent::__construct($db_host, $db_user, $db_pass, $db);
+        parent::__construct();
     }
 
     public function get_tasks()
