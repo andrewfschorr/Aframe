@@ -11,15 +11,15 @@ use Aframe\Utils\Util;
 class User extends Auth_User
 {
     private $request;
-    private $response;
-    private $renderer;
+    private $response;    
+
+    protected $renderer;
 
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
-        parent::__construct();
+        parent::__construct($renderer);
         $this->request = $request;
         $this->response = $response;
-        $this->renderer = $renderer;
     }
 
     public function show_login()
