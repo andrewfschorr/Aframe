@@ -1,9 +1,13 @@
 <?php
 
 return [
+    ['GET', '/',             ['User', 'show_profile']],
+
     ['GET', '/todo',         ['Todo']],
     ['POST', '/todo',        ['Todo', 'add_task']],
     ['DELETE', '/todo',      ['Todo', 'delete_task']],
+
+    ['GET', '/api/todo',      ['Api', 'todos']],
 
     ['GET', '/signup',       ['Authorization', 'show_signup']],
     ['POST', '/signup',      ['Authorization', 'signup']],
@@ -11,9 +15,7 @@ return [
     ['POST', '/login',       ['Authorization', 'login']],
     ['GET', '/logout',       ['Authorization', 'logout']],
 
-    ['GET', '/profile',      ['User', 'show_profile']],
-
     ['GET', '/home',         ['Homepage']],
-    //['GET', '/{slug}',     ['Page']],
+    ['GET', '/{slug}',     ['Page']],
     ['GET', '/hello/{name}', ['Test']],
 ];

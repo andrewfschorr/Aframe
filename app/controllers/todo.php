@@ -16,7 +16,7 @@ class Todo extends Auth_user
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
         parent::__construct($request, $response, $renderer);
-        $this->task = new Task();
+        $this->task_model = new Task();
     }
 
     public function index()
@@ -26,7 +26,7 @@ class Todo extends Auth_user
             unset($_SESSION['error_msg']);
         }
 
-        $tasks = $this->task->get_tasks();
+        $tasks = $this->task_model->get_tasks();
         $data = [
             'tasks' => $tasks,
             'title' => 'To dos!',
@@ -44,7 +44,7 @@ class Todo extends Auth_user
     {
         $task = $this->request->getParameter('task', $defaultValue = null);
         if ($task) {
-            $this->task->add_task($task);
+            $this->task_model->add_task($task);
         } else {
             $_SESSION['error_msg'] = 'You can\'t have a blank task!';
         }
@@ -55,6 +55,6 @@ class Todo extends Auth_user
     public function delete_task()
     {
         $task_id = $this->request->getParameter('id', $defaultValue = null);
-        $this->task->delete_task($task_id);
+        $this->task_model->delete_task($task_id);
     }
 }
