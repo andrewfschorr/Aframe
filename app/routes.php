@@ -1,16 +1,19 @@
 <?php
 
 return [
-    ['GET', '/todo', ['Todo']],
-    ['POST', '/todo', ['Todo', 'add_task']],
-    ['DELETE', '/todo', ['Todo', 'delete_task']],
+    ['GET', '/todo',         ['Todo']],
+    ['POST', '/todo',        ['Todo', 'add_task']],
+    ['DELETE', '/todo',      ['Todo', 'delete_task']],
 
-    ['GET', '/signup', ['User', 'show_signup']],
-    ['POST', '/signup', ['User', 'signup']],
-    ['GET', '/login', ['User', 'show_login']],
-    ['POST', '/login', ['User', 'login']],
+    ['GET', '/signup',       ['Authorization', 'show_signup']],
+    ['POST', '/signup',      ['Authorization', 'signup']],
+    ['GET', '/login',        ['Authorization', 'show_login']],
+    ['POST', '/login',       ['Authorization', 'login']],
+    ['GET', '/logout',       ['Authorization', 'logout']],
 
-    ['GET', '/home', ['Homepage']],
-    //['GET', '/{slug}', ['Page']],
+    ['GET', '/profile',      ['User', 'show_profile']],
+
+    ['GET', '/home',         ['Homepage']],
+    //['GET', '/{slug}',     ['Page']],
     ['GET', '/hello/{name}', ['Test']],
-];  
+];

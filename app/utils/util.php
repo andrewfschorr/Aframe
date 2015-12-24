@@ -26,4 +26,9 @@ class Util
     {
         unset($_SESSION[$key]);
     }
+
+    public static function destroy_session()
+    {
+        session_destroy();
+    }
 }
