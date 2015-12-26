@@ -22,7 +22,7 @@ class FilePageReader implements PageReader
             throw new InvalidArgumentException('slug must be a string');
         }
 
-        $path = "$this->pageFolder/$slug.md";
+        $path = "$this->pageFolder/static_pages/$slug.html";
 
         if(!file_exists($path)) {
             throw new InvalidPageException($slug);

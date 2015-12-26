@@ -10,7 +10,7 @@ use Aframe\Page\InvalidPageException;
 
 class Static_page
 {
-
+    private $request;
     private $response;
     private $renderer;
     private $pageReader;
@@ -25,25 +25,16 @@ class Static_page
 
     public function index($params)
     {
-        if (isset($params['slug'])) {
-            try {
-                $data['content'] = $this->pageReader->readBySlug($params['slug']);
-            } catch (InvalidPageException $e) {
-                $this->response->setStatusCode(404);
-                $this->response->setContent('404 - Page not found');
-                echo $this->response->getContent();
-                return;
-            }
-            $data['content'] = $this->pageReader->readBySlug($params['slug']);
-            $file_path = 'partials/page';
-        } else {
-            $uri = $this->request->getUri();
-            $file_path = "pages/$uri";
-            $data = array();
+        try {
+            $page_contents = $this->pageReader->readBySlug($params['slug']);
+        } catch (InvalidPageException $e) {
+            $this->response->setStatusCode(404);
+            $this->response->setContent('404 - Page not found');
+            echo $this->response->getContent();
+            return;
         }
 
-        $html = $this->renderer->render("$file_path", $data);
-        $this->response->setContent($html);
+        $this->response->setContent($page_contents);
         echo $this->response->getContent();
     }
 }

@@ -17,7 +17,5 @@ return [
 
     ['GET', '/home',         ['Homepage']],
 
-    ['GET', '/hello-world',  ['Static_page']],
     ['GET', '/{slug}',       ['Static_page']],
-    ['GET', '/hello/{name}', ['Test']],
 ];
