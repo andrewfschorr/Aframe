@@ -16,6 +16,8 @@ return [
     ['GET', '/logout',       ['Authorization', 'logout']],
 
     ['GET', '/home',         ['Homepage']],
-    ['GET', '/{slug}',     ['Page']],
+
+    ['GET', '/hello-world',  ['Static_page']],
+    ['GET', '/{slug}',       ['Static_page']],
     ['GET', '/hello/{name}', ['Test']],
 ];
