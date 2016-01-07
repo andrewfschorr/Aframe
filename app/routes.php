@@ -1,7 +1,8 @@
 <?php
 
 return [
-    ['GET', '/',             ['User', 'show_profile']],
+    // ['GET', '/',             ['User', 'show_profile']],
+    ['GET', '/',             ['Authorization']],
 
     ['GET', '/todo',         ['Todo']],
     ['POST', '/todo',        ['Todo', 'add_task']],

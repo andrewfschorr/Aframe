@@ -42,11 +42,12 @@ class Todo extends Auth_user
 
     public function add_task()
     {
-        $task = $this->request->getParameter('task', $defaultValue = null);
-        if ($task) {
-            $this->task_model->add_task($task);
+        $file_array = $this->request->getFiles();
+        $parameters_array = $this->request->getParameters();
+        if (!$file_array['image-file']['name'] || !$parameters_array['title']) {
+            $_SESSION['error_msg'] = 'You didn\'t give a title and image!';
         } else {
-            $_SESSION['error_msg'] = 'You can\'t have a blank task!';
+            $this->task_model->add_task(array_merge($file_array, $parameters_array));
         }
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit();

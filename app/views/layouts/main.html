@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{{title}}</title>
+        <title>Aframe</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/styles/main.css">
     </head>
@@ -18,12 +18,11 @@
                                 <p class="navbar-text"><a href="/login">Login</a> or <a href="/signup">signup</a></p>
                             {% endif %}
                         </p>
-                        <!-- <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Page 1</a></li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
-                        </ul> -->
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        {% if user_id is not null %}
+                            <a type="button" href="/logout" class="navbar-right btn btn-default navbar-btn">Sign out</a>
+                        {% endif %}
                     </div>
               </div>
         </nav>

@@ -18,6 +18,15 @@ class Authorization
         $this->email = Util::get_session('email');
     }
 
+    public function index()
+    {
+        if (empty($this->user_id)) {
+            Util::redirect_and_exit('/login');
+        } else {
+            Util::redirect_and_exit('/todo');
+        }
+    }
+
     public function logout()
     {
         Util::destroy_session();
@@ -26,6 +35,9 @@ class Authorization
 
     public function show_login()
     {
+        if (!empty($this->user_id)) {
+            Util::redirect_and_exit('/todo');
+        }
         $error_msg = Util::get_session('error_msg');
         if(!empty($error_msg)) {
             Util::un_set_session('error_msg');
@@ -90,13 +102,14 @@ class Authorization
                 }
                 Util::set_session('user_id', $row['user_id']);
                 Util::set_session('email', $row['email']);
-                Util::redirect_and_exit($this->request->getUri());
+                Util::redirect_and_exit('/todo');
             } else {
-                $error_msg = 'wrong password brah';
+                $error_msg = 'password and or username are incorrect';
             }
         }
 
         if (isset($error_msg)) {
+            error_log('error message is set');
             Util::set_session('error_msg', $error_msg);
             Util::redirect_and_exit($this->request->getUri());
         }

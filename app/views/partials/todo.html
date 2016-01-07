@@ -27,11 +27,20 @@
         {% endfor %}
     </table>
 
-    <h2>Add a to-do!</h2>
-    <form action="/todo" method="post">
+    <h2>Add that new hotness</h2>
+    <form enctype="multipart/form-data" action="/todo" method="post">
         <div class="form-group">
-            <label for="task">Task</label>
-            <input type="text" name="task" class="form-control" placeholder="Task">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" class="form-control" placeholder="Location">
+        </div>
+        <div class="form-group">
+            <label for="imageUpload">Image</label>
+            <input type="file" id="image-file" name="image-file">
+            <p class="help-block">Upload your image!</p>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
