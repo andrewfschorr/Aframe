@@ -6,6 +6,7 @@ use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
 use Aframe\Models\Task;
+use Aframe\Utils\Util;
 
 class Todo extends Auth_user
 {
@@ -21,9 +22,9 @@ class Todo extends Auth_user
 
     public function index()
     {
-        if(!empty($_SESSION['error_msg'])) {
-            $error_msg = $_SESSION['error_msg'];
-            unset($_SESSION['error_msg']);
+        if(!empty(Util::get_session('error_msg'))) {
+            $error_msg = Util::get_session('error_msg');
+            Util::un_set_session('error_msg');
         }
 
         $tasks = $this->task_model->get_tasks();
@@ -45,10 +46,15 @@ class Todo extends Auth_user
         $file_array = $this->request->getFiles();
         $parameters_array = $this->request->getParameters();
         if (!$file_array['image-file']['name'] || !$parameters_array['title']) {
-            $_SESSION['error_msg'] = 'You didn\'t give a title and image!';
+            Util::set_session('error_msg', 'You didn\'t give a title and image!');
         } else {
-            $this->task_model->add_task(array_merge($file_array, $parameters_array));
+            $img = $this->task_model->add_task(array_merge($file_array, $parameters_array));
         }
+
+        if (!$img) {
+
+        }
+
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit();
     }
