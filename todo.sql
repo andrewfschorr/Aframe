@@ -15,7 +15,8 @@ CREATE TABLE `images` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `title` text,
     `location` text,
-    `image` longblob NOT NULL,
+    `file_location` text,
+    `file_name` text,
     `date` date NOT NULL,
     `time` time NOT NULL,
     PRIMARY KEY (`id`)
@@ -25,6 +26,5 @@ CREATE TABLE `images` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `task`, `date`, `time`) VALUES
-(2, 'Build to-do list app', '2014-10-23', '04:02:31'),
-(3, 'Add to-do items', '2014-10-28', '16:21:12');
+INSERT INTO `images` (`id`, `title`, `location`, `file_name`, `image`, `date`, `time`) VALUES
+(2, 'title', 'location', '', '' ,'2014-10-23', '04:02:31');

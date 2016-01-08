@@ -10,18 +10,24 @@
 
     <table class="table table-striped">
         <tr>
-            <th>Task ID</th>
-            <th>Task</th>
+            <th>Image ID</th>
+            <th>title</th>
+            <th>Image</th>
+            <th>File Location</th>
+            <th>Thumbnail</th>
             <th>Date</th>
             <th>Time</th>
             <th>Delete</th>
         </tr>
         {% for task in tasks %}
             <tr>
-                <td> {{ task['id'] }}</td>
-                <td> {{ task['task'] }}</td>
-                <td> {{ task['date'] }}</td>
-                <td> {{ task['time'] }}</td>
+                <td>{{ task['id'] }}</td>
+                <td>{{ task['title'] }}</td>
+                <td>{{ task['location'] }}</td>
+                <td>{{ task['file_location'] }}</td>
+                <td> <img style="max-width:120px;" src="/assets/img/uploaded_images/{{ task['file_name'] }}"></td>
+                <td>{{ task['date'] }}</td>
+                <td>{{ task['time'] }}</td>
                 <td><button data-id="{{task['id']}}" type="button" class="deleteTask btn btn-danger btn-xs">Delete</button></td>
             </tr>
         {% endfor %}

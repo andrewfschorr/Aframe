@@ -45,14 +45,19 @@ class Todo extends Auth_user
     {
         $file_array = $this->request->getFiles();
         $parameters_array = $this->request->getParameters();
-        if (!$file_array['image-file']['name'] || !$parameters_array['title']) {
+
+        // if theres an image set
+        if ( $file_array['image-file']['size'] ){
+            if (!is_uploaded_file($file_array['image-file']['tmp_name']) || !getimagesize($file_array['image-file']['tmp_name']) || $file_array['image-file']['error']) {
+                Util::set_session('error_msg', 'there was an error with the image');
+            }
+        }
+
+        //if (!$file_array['image-file']['name'] || !$parameters_array['title']) {
+        if (!$parameters_array['title']) {
             Util::set_session('error_msg', 'You didn\'t give a title and image!');
         } else {
             $img = $this->task_model->add_task(array_merge($file_array, $parameters_array));
-        }
-
-        if (!$img) {
-
         }
 
         header('Location: ' . $_SERVER['REQUEST_URI']);

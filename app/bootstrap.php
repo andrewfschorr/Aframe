@@ -15,6 +15,7 @@ foreach ($response->getHeaders() as $header) {
 }
 
 if (strpos($request->getFullUrl(), '.dev')) {
+    ini_set('display_errors',1);
     error_reporting(E_ALL);
     define('ENV', 'dev');
 }
