@@ -5,7 +5,8 @@ namespace Aframe\Controllers;
 use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
-use Aframe\Models\Task;
+use Aframe\Models\TaskModel;
+use Aframe\Models\CategoryModel;
 use Aframe\Utils\Util;
 
 class Todo extends Auth_user
@@ -17,7 +18,8 @@ class Todo extends Auth_user
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
         parent::__construct($request, $response, $renderer);
-        $this->task_model = new Task();
+        $this->task_model = new TaskModel();
+        $this->category_model = new CategoryModel();
     }
 
     public function index()
@@ -28,12 +30,14 @@ class Todo extends Auth_user
         }
 
         $tasks = $this->task_model->get_tasks();
+        $categories = $this->category_model->get_categories();
         $data = [
             'tasks' => $tasks,
             'title' => 'To dos!',
             'error' => (isset($error_msg)) ? $error_msg : null,
             'user_id' => (isset($this->user_id)) ? $this->user_id : null,
             'email' => (isset($this->email)) ? $this->email : null,
+            'categories' => (isset($categories)) ? $categories : null,
         ];
 
         $html = $this->renderer->render('partials/todo', $data);
@@ -48,6 +52,7 @@ class Todo extends Auth_user
 
         // if theres an image set
         if ( $file_array['image-file']['size'] ){
+            error_log(print_r($file_array, true));
             if (!is_uploaded_file($file_array['image-file']['tmp_name']) || !getimagesize($file_array['image-file']['tmp_name']) || $file_array['image-file']['error']) {
                 Util::set_session('error_msg', 'there was an error with the image');
             }

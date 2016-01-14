@@ -2,7 +2,7 @@
 
 namespace Aframe\Models;
 
-class Task extends DB
+class TaskModel extends DB
 {
     public function __construct()
     {

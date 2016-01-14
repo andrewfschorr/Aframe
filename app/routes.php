@@ -8,6 +8,10 @@ return [
     ['POST', '/todo',        ['Todo', 'add_task']],
     ['DELETE', '/todo',      ['Todo', 'delete_task']],
 
+    //['GET', '/category ',    ['Category']],
+    ['POST', '/category',    ['Category', 'add_category']],
+    ['DELETE', '/category',  ['Category', 'delete_category']],
+
     ['GET', '/api/todo',      ['Api', 'todos']],
 
     ['GET', '/signup',       ['Authorization', 'show_signup']],

@@ -7,6 +7,25 @@
         </div>
     {% endif %}
 
+    <h2>Add a category</h2>
+    <form action="/category" method="post">
+        <div class="form-group">
+            <label for="category">category</label>
+            <input type="text" name="category" class="form-control" placeholder="category">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    {% if categories is not null %}
+        <ul>
+            {% for category in categories %}
+                <li>{{ category }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-warning" role="alert">Sorry man, no categories yet.</div>
+    {% endif %}
+
+    <br><br><br><br>
 
     <table class="table table-striped">
         <tr>

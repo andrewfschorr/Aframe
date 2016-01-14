@@ -13,6 +13,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `images` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
+    `category` text,
     `title` text,
     `location` text,
     `file_location` text,
@@ -20,7 +21,7 @@ CREATE TABLE `images` (
     `date` date NOT NULL,
     `time` time NOT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `tasks`
