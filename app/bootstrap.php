@@ -2,6 +2,8 @@
 
 namespace Aframe;
 
+use Aframe\Utils\Util;
+
 require ROOT . '/vendor/autoload.php';
 require ROOT . '/config/config.php';
 
@@ -14,7 +16,7 @@ foreach ($response->getHeaders() as $header) {
     header($header, false);
 }
 
-if (strpos($request->getFullUrl(), '.dev')) {
+if (strpos(Util::getFullUrl(), '.dev')) {
     ini_set('display_errors',1);
     error_reporting(E_ALL);
     define('ENV', 'dev');
@@ -53,6 +55,7 @@ switch ($routeInfo[0]) {
         $response->setStatusCode(404);
         break;
     case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        echo '405';
         $response->setContent('405 - Method not allowed');
         $response->setStatusCode(405);
         break;

@@ -7,69 +7,28 @@
         </div>
     {% endif %}
 
-    <h2>Add a category</h2>
-    <form action="/category" method="post">
-        <div class="form-group">
-            <label for="category">category</label>
-            <input type="text" name="category" class="form-control" placeholder="category">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    {% if categories is not null %}
-        <ul>
-            {% for category in categories %}
-                <li>{{ category }}</li>
+    <h2>Pages</h2>
+
+    {% if pages is not null %}
+        <table class="table table-striped">
+            <tr>
+                <th>Page</th>
+            </tr>
+            {% for page in pages %}
+                <tr>
+                    <td><a href="/page/{{ page }}">{{ page }}</a></td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
-        <div class="alert alert-warning" role="alert">Sorry man, no categories yet.</div>
+        <div class="alert alert-warning" role="alert">Sorry man, no pages yet.</div>
     {% endif %}
 
-    <br><br><br><br>
-
-    <table class="table table-striped">
-        <tr>
-            <th>Image ID</th>
-            <th>title</th>
-            <th>Image</th>
-            <!-- <th>File Location</th> -->
-            <th>Thumbnail</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Delete</th>
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task['id'] }}</td>
-                <td>{{ task['title'] }}</td>
-                <td>{{ task['location'] }}</td>
-                <!-- <td>{{ task['file_location'] }}</td> -->
-                <td>
-                    {% if task['file_location'] %}
-                         <img style="max-width:120px;" src="/assets/img/uploaded_images/{{ task['file_name'] }}">
-                    {% endif %}
-                </td>
-                <td>{{ task['date'] }}</td>
-                <td>{{ task['time'] }}</td>
-                <td><button data-id="{{task['id']}}" type="button" class="deleteTask btn btn-danger btn-xs">Delete</button></td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h2>Add that new hotness</h2>
-    <form enctype="multipart/form-data" action="/todo" method="post">
+    <h3>Add a page</h3>
+    <form action="/page" method="post">
         <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Title">
-        </div>
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" name="location" class="form-control" placeholder="Location">
-        </div>
-        <div class="form-group">
-            <label for="imageUpload">Image</label>
-            <input type="file" id="image-file" name="image-file">
-            <p class="help-block">Upload your image!</p>
+            <label for="page">page</label>
+            <input type="text" name="page" class="form-control" placeholder="page">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

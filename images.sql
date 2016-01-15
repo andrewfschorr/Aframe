@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `images` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `category` text,
+    `page` text,
     `title` text,
     `location` text,
     `file_location` text,

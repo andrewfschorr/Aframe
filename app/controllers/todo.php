@@ -6,7 +6,6 @@ use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
 use Aframe\Models\TaskModel;
-use Aframe\Models\CategoryModel;
 use Aframe\Utils\Util;
 
 class Todo extends Auth_user
@@ -19,7 +18,6 @@ class Todo extends Auth_user
     {
         parent::__construct($request, $response, $renderer);
         $this->task_model = new TaskModel();
-        $this->category_model = new CategoryModel();
     }
 
     public function index()
@@ -29,16 +27,12 @@ class Todo extends Auth_user
             Util::un_set_session('error_msg');
         }
 
-        $tasks = $this->task_model->get_tasks();
-        $categories = $this->category_model->get_categories();
         $data = [
-            'tasks' => $tasks,
-            'title' => 'To dos!',
-            'error' => (isset($error_msg)) ? $error_msg : null,
-            'user_id' => (isset($this->user_id)) ? $this->user_id : null,
-            'email' => (isset($this->email)) ? $this->email : null,
-            'categories' => (isset($categories)) ? $categories : null,
+            'title' => 'Pages',
+            'error' => isset($error_msg) ? $error_msg : null,
         ];
+
+        $data = array_merge($data, $this->data); // merge with parent data
 
         $html = $this->renderer->render('partials/todo', $data);
         $this->response->setContent($html);
@@ -58,15 +52,13 @@ class Todo extends Auth_user
             }
         }
 
-        //if (!$file_array['image-file']['name'] || !$parameters_array['title']) {
         if (!$parameters_array['title']) {
             Util::set_session('error_msg', 'You didn\'t give a title and image!');
         } else {
             $img = $this->task_model->add_task(array_merge($file_array, $parameters_array));
         }
 
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit();
+        Util::redirect_and_exit($this->request->getReferer());
     }
 
     public function delete_task()

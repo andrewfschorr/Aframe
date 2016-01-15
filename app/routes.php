@@ -1,26 +1,26 @@
 <?php
 
 return [
-    // ['GET', '/',             ['User', 'show_profile']],
-    ['GET', '/',             ['Authorization']],
 
-    ['GET', '/todo',         ['Todo']],
-    ['POST', '/todo',        ['Todo', 'add_task']],
-    ['DELETE', '/todo',      ['Todo', 'delete_task']],
+    ['GET', '/',                ['Authorization']],
 
-    //['GET', '/category ',    ['Category']],
-    ['POST', '/category',    ['Category', 'add_category']],
-    ['DELETE', '/category',  ['Category', 'delete_category']],
+    ['GET', '/todo',            ['Todo']],
+    ['POST', '/todo',           ['Todo', 'add_task']],
+    ['DELETE', '/todo',         ['Todo', 'delete_task']],
 
-    ['GET', '/api/todo',      ['Api', 'todos']],
+    ['POST', '/page',           ['Page', 'add_page']],
+    ['DELETE', '/page',         ['Page', 'delete_page']],
+    ['GET', '/page/{page}',     ['Page', 'display_page']],
 
-    ['GET', '/signup',       ['Authorization', 'show_signup']],
-    ['POST', '/signup',      ['Authorization', 'signup']],
-    ['GET', '/login',        ['Authorization', 'show_login']],
-    ['POST', '/login',       ['Authorization', 'login']],
-    ['GET', '/logout',       ['Authorization', 'logout']],
+    ['GET', '/api/todo',        ['Api', 'todos']],
 
-    ['GET', '/home',         ['Homepage']],
+    ['GET', '/signup',          ['Authorization', 'show_signup']],
+    ['POST', '/signup',         ['Authorization', 'signup']],
+    ['GET', '/login',           ['Authorization', 'show_login']],
+    ['POST', '/login',          ['Authorization', 'login']],
+    ['GET', '/logout',          ['Authorization', 'logout']],
 
-    ['GET', '/{slug}',       ['Static_page']],
+    ['GET', '/home',            ['Homepage']],
+
+    //['GET', '/{slug}',          ['Static_page']],
 ];

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Aframe\Utils;
 
@@ -14,7 +14,7 @@ class Util
 
     public static function set_session($key, $value)
     {
-        $_SESSION[$key] = $value;   
+        $_SESSION[$key] = $value;
     }
 
     public static function get_session($key)
@@ -30,5 +30,10 @@ class Util
     public static function destroy_session()
     {
         session_destroy();
+    }
+
+    public static function getFullUrl()
+    {
+        return $_SERVER['HTTP_HOST'];
     }
 }

@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace Aframe\Models;
 
 use Mysqli;
 
-class DB 
+class DB
 {
     public function __construct()
     {

@@ -1,4 +1,57 @@
-{% extends "/layouts/nav-layout.html" %}
+{% extends "/layouts/main.html" %}
 {% block content %}
-    {{ content }}
+
+    {% if error is not null %}
+        <div class="alert alert-danger">
+            <strong>Uh oh!</strong> {{error}}
+        </div>
+    {% endif %}
+    <h1>{{page}}</h1>
+
+    {% if tasks is not null %}
+        <table class="table table-striped">
+            <tr>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Image Type</th>
+                <th>Thumbnail</th>
+                <th>Delete</th>
+            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task['title'] }}</td>
+                    <td>{{ task['location'] }}</td>
+                    <td>{{ task['page'] }}</td>
+                    <td>
+                        {% if task['file_location'] %}
+                             <img style="max-width:120px;" src="/assets/img/uploaded_images/{{page}}/{{ task['file_name'] }}">
+                        {% endif %}
+                    </td>
+                    <td><button data-id="{{task['id']}}" type="button" class="deleteTask btn btn-danger btn-xs">Delete</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="alert alert-warning" role="alert">No photos yes :(</div>
+    {% endif %}
+
+    <h2>Add that new hotness</h2>
+    <form enctype="multipart/form-data" action="/todo" method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" class="form-control" placeholder="Location">
+        </div>
+        <input type="hidden" name="image_type" value="{{page}}">
+        <div class="form-group">
+            <label for="imageUpload">Image</label>
+            <input type="file" id="image-file" name="image-file">
+            <p class="help-block">Upload your image!</p>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
 {% endblock %}
