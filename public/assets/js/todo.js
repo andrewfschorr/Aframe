@@ -4,10 +4,23 @@ var AFRAME = AFRAME || {};
 AFRAME.todo = (function() {
 
     var init = function() {
-        $('.deleteImage').on('click', deleteImage);
+        $('.deleteImage').on('click', __deleteThing);
+        $('.deleteGroup').on('click', __deleteThing);
+
     };
 
-    var deleteImage = function(){
+    // var deleteImage = function(){
+    //     var imageId = $(this).data('id');
+    //     $.ajax({
+    //         url: '/image?id=' + imageId,
+    //         type: 'DELETE',
+    //         success: function(result) {
+    //             location.reload();
+    //         }
+    //     });
+    // };
+
+    __deleteThing: function(){
         var imageId = $(this).data('id');
         $.ajax({
             url: '/image?id=' + imageId,

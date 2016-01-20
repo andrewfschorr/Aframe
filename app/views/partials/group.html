@@ -33,7 +33,7 @@
         </table>
     {% else %}
         <div class="alert alert-warning" role="alert">No photos yes :(</div>
-        <a href="#" data-id="{{group}}" class="btn btn-danger">Delete Group</a>
+        <a href="#" data-id="{{group}}" class="btn btn-danger deleteGroup">Delete Group</a>
     {% endif %}
 
     <h2>Add that new hotness</h2>
@@ -46,7 +46,7 @@
             <label for="location">Location</label>
             <input type="text" name="location" class="form-control" placeholder="Location">
         </div>
-        <input type="hidden" name="image_type" value="{{page}}">
+        <input type="hidden" name="image_type" value="{{group}}">
         <div class="form-group">
             <label for="imageUpload">Image</label>
             <input type="file" id="image-file" name="image-file">
