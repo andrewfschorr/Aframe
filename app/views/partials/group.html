@@ -6,9 +6,9 @@
             <strong>Uh oh!</strong> {{error}}
         </div>
     {% endif %}
-    <h1>{{page}}</h1>
+    <h1>{{group}}</h1>
 
-    {% if tasks is not null %}
+    {% if images is not null %}
         <table class="table table-striped">
             <tr>
                 <th>Title</th>
@@ -17,26 +17,27 @@
                 <th>Thumbnail</th>
                 <th>Delete</th>
             </tr>
-            {% for task in tasks %}
+            {% for image in images %}
                 <tr>
-                    <td>{{ task['title'] }}</td>
-                    <td>{{ task['location'] }}</td>
-                    <td>{{ task['page'] }}</td>
+                    <td>{{ image['title'] }}</td>
+                    <td>{{ image['location'] }}</td>
+                    <td>{{ image['group'] }}</td>
                     <td>
-                        {% if task['file_location'] %}
-                             <img style="max-width:120px;" src="/assets/img/uploaded_images/{{page}}/{{ task['file_name'] }}">
+                        {% if image['file_location'] %}
+                             <img style="max-width:120px;" src="/assets/img/uploaded_images/{{group}}/{{ image['file_name'] }}">
                         {% endif %}
                     </td>
-                    <td><button data-id="{{task['id']}}" type="button" class="deleteTask btn btn-danger btn-xs">Delete</button></td>
+                    <td><button data-id="{{image['id']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button></td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
         <div class="alert alert-warning" role="alert">No photos yes :(</div>
+        <a href="#" data-id="{{group}}" class="btn btn-danger">Delete Group</a>
     {% endif %}
 
     <h2>Add that new hotness</h2>
-    <form enctype="multipart/form-data" action="/todo" method="post">
+    <form enctype="multipart/form-data" action="/image" method="post">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" class="form-control" placeholder="Title">

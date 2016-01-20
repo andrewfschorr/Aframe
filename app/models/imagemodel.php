@@ -2,22 +2,22 @@
 
 namespace Aframe\Models;
 
-class TaskModel extends DB
+class ImageModel extends DB
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function get_page_tasks($page)
+    public function get_images($page)
     {
         $result = $this->connection->query("SELECT * FROM images WHERE page='$page'");
         return $this->format_results($result);
     }
 
-    public function get_all_tasks()
+    public function get_all_images()
     {
-        $tasks = array();
+        $images = array();
         $result = $this->connection->query("SELECT * FROM images");
         return $this->format_results($result);
     }
@@ -44,7 +44,7 @@ class TaskModel extends DB
         return $images;
     }
 
-    public function add_task($image_params){
+    public function add_image($image_params){
         $title = $image_params['title'];
         $location = $image_params['location'];
         $file_name = $image_params['image-file']['name'];
@@ -69,7 +69,7 @@ class TaskModel extends DB
         $this->connection->query($query);
     }
 
-    public function delete_task($image_id)
+    public function delete_image($image_id)
     {
         $query = "DELETE FROM images WHERE id='$image_id'";
         $this->connection->query($query);

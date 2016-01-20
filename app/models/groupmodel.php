@@ -2,29 +2,29 @@
 
 namespace Aframe\Models;
 
-class PageModel extends DB
+class GroupModel extends DB
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function get_pages()
+    public function get_groups()
     {
         $pages = array();
-        $result = $this->connection->query("SELECT * FROM pages");
+        $result = $this->connection->query("SELECT * FROM groups");
         while($row = $result->fetch_assoc())
         {
-            $pages[] = $row['page'];
+            $pages[] = $row['group'];
         }
 
         $result->free();
         return $pages;
     }
 
-    public function add_page($page)
+    public function add_group($group)
     {
-        $query = "INSERT INTO pages (`page`) VALUES ('$page')";
+        $query = "INSERT INTO groups (`group`) VALUES ('$group')";
         return $this->connection->query($query);
     }
 }

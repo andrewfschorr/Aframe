@@ -5,10 +5,10 @@ namespace Aframe\Controllers;
 use Http\Request;
 use Http\Response;
 use Aframe\Template\FrontendRenderer;
-use Aframe\Models\TaskModel;
+use Aframe\Models\ImageModel;
 use Aframe\Utils\Util;
 
-class Page extends Auth_user
+class Group extends Auth_user
 {
     protected $request;
     protected $response;
@@ -16,42 +16,61 @@ class Page extends Auth_user
     public function __construct(Request $request, Response $response, FrontendRenderer $renderer)
     {
         parent::__construct($request, $response, $renderer);
-        $this->task_model = new TaskModel();
+        $this->image_model = new ImageModel();
     }
 
-    public function delete_page()
+    public function index()
+    {
+        if(!empty(Util::get_session('error_msg'))) {
+            $error_msg = Util::get_session('error_msg');
+            Util::un_set_session('error_msg');
+        }
+
+        $data = [
+            'title' => 'Groups',
+            'error' => isset($error_msg) ? $error_msg : null,
+        ];
+
+        $data = array_merge($data, $this->data); // merge with parent data
+
+        $html = $this->renderer->render('partials/groups', $data);
+        $this->response->setContent($html);
+        echo $this->response->getContent();
+    }
+
+    public function delete_group()
     {
 
     }
 
-    public function add_page()
+    public function add_group()
     {
         $parameters_array = $this->request->getParameters();
-        $page_name = $this->make_seo_friendly_af($parameters_array['page']); // totally overkill
-        if (!$page_name) {
+        $group_name = $this->make_seo_friendly_af($parameters_array['group']); // totally overkill
+        if (!$group_name) {
             Util::set_session('error_msg', 'Page name can\'t be blank bruh');
-            Util::redirect_and_exit('/todo');
+            Util::redirect_and_exit('/groups');
         }
-        $added_page = $this->page_model->add_page($page_name);
-        Util::redirect_and_exit('/todo');
+        $added_page = $this->group_model->add_group($group_name);
+        Util::redirect_and_exit('/groups');
     }
 
-    public function display_page($response_params)
+    public function display_group($response_params)
     {
 
         $error_msg = Util::get_session('error_msg');
-        $page = $response_params['page'];
+        $group = $response_params['group'];
 
-        $tasks = $this->task_model->get_page_tasks($page);
+        $images = $this->image_model->get_images($group);
         $data = [
-            'tasks' => !empty($tasks) ? $tasks : null,
-            'page' => $page,
+            'images' => !empty($images) ? $images : null,
+            'group' => $group,
             'error' => (isset($error_msg)) ? $error_msg : null,
         ];
 
         $data = array_merge($data, $this->data); // merge with parent data
 
-        $html = $this->renderer->render('partials/page', $data);
+        $html = $this->renderer->render('partials/group', $data);
         $this->response->setContent($html);
         echo $this->response->getContent();
 

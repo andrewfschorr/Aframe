@@ -23,7 +23,7 @@ class Authorization
         if (empty($this->user_id)) {
             Util::redirect_and_exit('/login');
         } else {
-            Util::redirect_and_exit('/todo');
+            Util::redirect_and_exit('/groups');
         }
     }
 
@@ -36,7 +36,7 @@ class Authorization
     public function show_login()
     {
         if (!empty($this->user_id)) {
-            Util::redirect_and_exit('/todo');
+            Util::redirect_and_exit('/groups');
         }
         $error_msg = Util::get_session('error_msg');
         if(!empty($error_msg)) {
@@ -102,7 +102,7 @@ class Authorization
                 }
                 Util::set_session('user_id', $row['user_id']);
                 Util::set_session('email', $row['email']);
-                Util::redirect_and_exit('/todo');
+                Util::redirect_and_exit('/groups');
             } else {
                 $error_msg = 'password and or username are incorrect';
             }

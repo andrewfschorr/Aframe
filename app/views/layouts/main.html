@@ -16,12 +16,12 @@
                                 <p class="navbar-text">User id is {{user_id}} and email is {{email}}</p>
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/">Pages</a></li>
+                                            <li><a href="/">Groups</a></li>
                                             <li role="separator" class="divider"></li>
-                                            {% for page in pages %}
-                                                <li><a href="/page/{{ page }}">{{ page }}</a></li>
+                                            {% for group in groups %}
+                                                <li><a href="/group/{{ group }}">{{ group }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </li>

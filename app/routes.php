@@ -3,14 +3,14 @@
 return [
 
     ['GET', '/',                ['Authorization']],
+    ['GET', '/groups',          ['Group']],
+    ['POST', '/group',          ['Group', 'add_group']],
+    ['GET', '/group/{group}',   ['Group', 'display_group']],
+    ['DELETE', '/group',        ['Group', 'delete_group']],
 
-    ['GET', '/todo',            ['Todo']],
-    ['POST', '/todo',           ['Todo', 'add_task']],
-    ['DELETE', '/todo',         ['Todo', 'delete_task']],
+    ['POST', '/image',          ['Image', 'add_image']],
+    ['DELETE', '/image',        ['Image', 'delete_image']],
 
-    ['POST', '/page',           ['Page', 'add_page']],
-    ['DELETE', '/page',         ['Page', 'delete_page']],
-    ['GET', '/page/{page}',     ['Page', 'display_page']],
 
     ['GET', '/api/todo',        ['Api', 'todos']],
 

@@ -7,28 +7,28 @@
         </div>
     {% endif %}
 
-    <h2>Pages</h2>
+    <h2>Groups</h2>
 
-    {% if pages is not null %}
+    {% if groups is not null %}
         <table class="table table-striped">
             <tr>
                 <th>Page</th>
             </tr>
-            {% for page in pages %}
+            {% for group in groups %}
                 <tr>
-                    <td><a href="/page/{{ page }}">{{ page }}</a></td>
+                    <td><a href="/group/{{ group }}">{{ group }}</a></td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-        <div class="alert alert-warning" role="alert">Sorry man, no pages yet.</div>
+        <div class="alert alert-warning" role="alert">Sorry man, no groups yet.</div>
     {% endif %}
 
-    <h3>Add a page</h3>
-    <form action="/page" method="post">
+    <h3>Add a group</h3>
+    <form action="/group" method="post">
         <div class="form-group">
-            <label for="page">page</label>
-            <input type="text" name="page" class="form-control" placeholder="page">
+            <label for="group">group</label>
+            <input type="text" name="group" class="form-control" placeholder="group">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

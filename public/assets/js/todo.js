@@ -4,13 +4,13 @@ var AFRAME = AFRAME || {};
 AFRAME.todo = (function() {
 
     var init = function() {
-        $('.deleteTask').on('click', deleteTask);
+        $('.deleteImage').on('click', deleteImage);
     };
 
-    var deleteTask = function(){
-        var taskId = $(this).data('id');
+    var deleteImage = function(){
+        var imageId = $(this).data('id');
         $.ajax({
-            url: '/todo?id=' + taskId,
+            url: '/image?id=' + imageId,
             type: 'DELETE',
             success: function(result) {
                 location.reload();
