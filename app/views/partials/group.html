@@ -33,8 +33,9 @@
         </table>
     {% else %}
         <div class="alert alert-warning" role="alert">No photos yes :(</div>
-        <a href="#" data-id="{{group}}" class="btn btn-danger deleteGroup">Delete Group</a>
     {% endif %}
+        <!-- //put back -->
+        <a href="#" data-id="{{group}}" class="btn btn-danger deleteGroup">Delete Group</a>
 
     <h2>Add that new hotness</h2>
     <form enctype="multipart/form-data" action="/image" method="post">

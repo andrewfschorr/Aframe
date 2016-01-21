@@ -27,7 +27,6 @@ class Image extends Auth_user
 
         // if theres an image set
         if ( $file_array['image-file']['size'] ){
-            error_log(print_r($file_array, true));
             if (!is_uploaded_file($file_array['image-file']['tmp_name']) || !getimagesize($file_array['image-file']['tmp_name']) || $file_array['image-file']['error']) {
                 Util::set_session('error_msg', 'there was an error with the image');
             }
@@ -38,7 +37,6 @@ class Image extends Auth_user
         } else {
             $img = $this->image_model->add_image(array_merge($file_array, $parameters_array));
         }
-
         Util::redirect_and_exit($this->request->getReferer());
     }
 

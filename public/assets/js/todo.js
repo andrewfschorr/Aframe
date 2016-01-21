@@ -4,29 +4,33 @@ var AFRAME = AFRAME || {};
 AFRAME.todo = (function() {
 
     var init = function() {
-        $('.deleteImage').on('click', __deleteThing);
-        $('.deleteGroup').on('click', __deleteThing);
+        $('.deleteGroup, .deleteImage').on('click', __deleteThing);
 
     };
 
-    // var deleteImage = function(){
-    //     var imageId = $(this).data('id');
-    //     $.ajax({
-    //         url: '/image?id=' + imageId,
-    //         type: 'DELETE',
-    //         success: function(result) {
-    //             location.reload();
-    //         }
-    //     });
-    // };
+    var __deleteThing = function(e){
+        e.preventDefault();
+        var id = $(this).data('id'),
+            endpoint, type;
 
-    __deleteThing: function(){
-        var imageId = $(this).data('id');
+        if ($(this).hasClass('deleteImage')) {
+            endpoint = '/image?id=' + id;
+            type = 'image';
+        } else {
+            endpoint = '/group?id=' + id;
+            type = 'group';
+        }
+
         $.ajax({
-            url: '/image?id=' + imageId,
+            url: endpoint,
             type: 'DELETE',
             success: function(result) {
-                location.reload();
+                console.log(result);
+                // if (type === 'image') {
+                //     location.reload();
+                // } else {
+                //     window.location.href = '/';
+                // }
             }
         });
     };

@@ -38,9 +38,17 @@ class Group extends Auth_user
         echo $this->response->getContent();
     }
 
-    public function delete_group()
+    public function delete_group($id)
     {
+        $group_name = $this->request->getParameter('id', $defaultValue = null);
+        $group_thing = $this->group_model->delete_group($group_name);
 
+        if (!$group_thing) {
+            Util::set_session('error_msg', 'Sorry, can\'t delete a non-empty group');
+            Util::redirect_and_exit($this->request->getReferer());
+        } else {
+            Util::redirect_and_exit(Util::get_server_name());
+        }
     }
 
     public function add_group()
@@ -60,7 +68,6 @@ class Group extends Auth_user
 
         $error_msg = Util::get_session('error_msg');
         $group = $response_params['group'];
-
         $images = $this->image_model->get_images($group);
         $data = [
             'images' => !empty($images) ? $images : null,

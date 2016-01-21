@@ -9,9 +9,9 @@ class ImageModel extends DB
         parent::__construct();
     }
 
-    public function get_images($page)
+    public function get_images($group)
     {
-        $result = $this->connection->query("SELECT * FROM images WHERE page='$page'");
+        $result = $this->connection->query("SELECT * FROM `images` WHERE `group` = '$group'");
         return $this->format_results($result);
     }
 
@@ -25,12 +25,16 @@ class ImageModel extends DB
     private function format_results($results)
     {
         $images = array();
+        if (empty($results)) {
+            return $images;
+        }
+
         while($row = $results->fetch_assoc())
         {
             $images[] = array(
                 'id'   => $row['id'],
                 'title' => $row['title'],
-                'page' => $row['page'],
+                'group' => $row['group'],
                 'location' => $row['location'],
                 'file_location' => $row['file_location'],
                 'file_name' => $row['file_name'],
@@ -51,7 +55,6 @@ class ImageModel extends DB
         $image_type = $image_params['image_type'];
 
         if ($image_params['image-file']['size']) {
-            error_log(print_r($image_params, true));
             if(!is_dir(ROOT . "/public/assets/img/uploaded_images/$image_type")) {
                 mkdir(ROOT . "/public/assets/img/uploaded_images/$image_type");
             }
@@ -65,8 +68,11 @@ class ImageModel extends DB
 
         $time = date('h:i:s');
         $date = date('Y-m-d');
-        $query = "INSERT INTO images (`title`, `page`, `location`, `file_location`, `file_name`, `date`, `time`) VALUES ('$title', '$image_type','$location', '$uploaded_image_location', '$file_name', '$date', '$time')";
+        $query = "INSERT INTO images (`title`, `group`, `location`, `file_location`, `file_name`, `date`, `time`) VALUES ('$title', '$image_type','$location', '$uploaded_image_location', '$file_name', '$date', '$time')";
         $this->connection->query($query);
+        if ($this->connection->error) {
+            error_log($this->connection->error);
+        }
     }
 
     public function delete_image($image_id)

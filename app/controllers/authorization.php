@@ -109,7 +109,6 @@ class Authorization
         }
 
         if (isset($error_msg)) {
-            error_log('error message is set');
             Util::set_session('error_msg', $error_msg);
             Util::redirect_and_exit($this->request->getUri());
         }

@@ -11,20 +11,33 @@ class GroupModel extends DB
 
     public function get_groups()
     {
-        $pages = array();
+        $groups = array();
         $result = $this->connection->query("SELECT * FROM groups");
         while($row = $result->fetch_assoc())
         {
-            $pages[] = $row['group'];
+            $groups[] = $row['group'];
         }
 
         $result->free();
-        return $pages;
+        return $groups;
     }
 
     public function add_group($group)
     {
         $query = "INSERT INTO groups (`group`) VALUES ('$group')";
         return $this->connection->query($query);
+    }
+
+    public function delete_group($group)
+    {
+        $query = "SELECT * FROM `images` WHERE `group` ='$group'";
+        $result = $this->connection->query($query);
+        if ($result->num_rows > 0) { // if more than 0
+            return false;
+        } else {
+            $query = "DELETE FROM `groups` WHERE `group` ='$group' LIMIT 1";
+            $result = $this->connection->query($query);
+            return true;
+        }
     }
 }

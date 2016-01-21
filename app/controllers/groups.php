@@ -28,7 +28,7 @@ class Groups extends Auth_user
         }
 
         $data = [
-            'title' => 'Pages',
+            'title' => 'Groups',
             'error' => isset($error_msg) ? $error_msg : null,
         ];
 
@@ -46,7 +46,6 @@ class Groups extends Auth_user
 
         // if theres an image set
         if ( $file_array['image-file']['size'] ){
-            error_log(print_r($file_array, true));
             if (!is_uploaded_file($file_array['image-file']['tmp_name']) || !getimagesize($file_array['image-file']['tmp_name']) || $file_array['image-file']['error']) {
                 Util::set_session('error_msg', 'there was an error with the image');
             }

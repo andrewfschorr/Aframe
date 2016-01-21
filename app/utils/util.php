@@ -36,4 +36,9 @@ class Util
     {
         return $_SERVER['HTTP_HOST'];
     }
+
+    public static function get_server_name()
+    {
+        return $_SERVER['SERVER_NAME'];
+    }
 }
