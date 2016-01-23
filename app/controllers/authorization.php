@@ -80,7 +80,7 @@ class Authorization
 
         if(!$params['email'] || !$params['password'])
         {
-            $error_msg = 'Please enter a valid username and password';
+            $error_msg = 'Please enter a valid username, password, and code';
         }
         else if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL))
         {
@@ -117,30 +117,35 @@ class Authorization
     public function signup()
     {
         $params = $this->request->getParameters();
-        if(!$params['email'] || !$params['password'] || !$params['form_token'])
+        if(!$params['email'] || !$params['password'] || !$params['form_token'] || !$params['code'])
         {
-            $error_msg = 'Please enter a valid username and password';
+            $error_msg = 'Please enter a valid username, password, and the code!';
         }
-        else if($params['form_token'] != Util::get_session('form_token'))
+        if($params['form_token'] != Util::get_session('form_token'))
         {
             $error_msg = 'Invalid form submission';
         }
-        else if (strlen( $params['email']) > 30 || strlen($params['email']) < 4)
+        if (strlen( $params['email']) > 30 || strlen($params['email']) < 4)
         {
             $error_msg = 'Incorrect Length for Username';
         }
-        else if (strlen( $params['password']) > 30 || strlen($params['password']) < 4)
+        if (strlen( $params['password']) > 30 || strlen($params['password']) < 4)
         {
             $error_msg = 'Incorrect Length for Password';
         }
-        else if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL))
+        if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL))
         {
             $error_msg = "Username must be an email";
         }
+
+        if ($params['code'] !== CODE) // proprietary check
+        {
+            $error_msg = "Incorrect Code!";
+        }
         // not the best, lets validate password eventually
         // else if (ctype_alnum($params['password']) != true)
-        else
-        {
+
+        if (!isset($error_msg)) {
             $email = filter_var($params['email'], FILTER_SANITIZE_STRING);
             $password = filter_var($params['password'], FILTER_SANITIZE_STRING);
 

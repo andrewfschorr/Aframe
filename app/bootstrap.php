@@ -50,6 +50,7 @@ $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
+        http_response_code(404);
         echo '404';
         $response->setContent('404 - Page not found');
         $response->setStatusCode(404);

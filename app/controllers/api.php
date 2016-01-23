@@ -25,9 +25,14 @@ class Api
         $group = $this->group_model->group_exists($group_name);
         if (!$group) {
             http_response_code(404);
+            echo json_encode(array('status' => 404));
         } else {
             $image_model = new ImageModel();
-            echo json_encode($image_model->get_images($group_name));
+            echo json_encode(array(
+                'status' => 200,
+                'images' => $image_model->get_images($group_name),
+            ));
+            //echo json_encode($image_model->get_images($group_name));
         }
     }
 }
