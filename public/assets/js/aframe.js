@@ -14,7 +14,7 @@ AFRAME.todo = (function() {
             endpoint, type;
 
         if ($(this).hasClass('deleteImage')) {
-            endpoint = '/image?id=' + id;
+            endpoint = '/image?id=' + id + '&group=' + $(this).data('group');
             type = 'image';
         } else {
             endpoint = '/group?id=' + id;

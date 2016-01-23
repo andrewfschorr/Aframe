@@ -43,7 +43,8 @@ class Image extends Auth_user
     public function delete_image()
     {
         $image_id = $this->request->getParameter('id', $defaultValue = null);
-        $deleted_image = $this->image_model->delete_image($image_id);
+        $group = $this->request->getParameter('group', $defaultValue = null);
+        $deleted_image = $this->image_model->delete_image($image_id, $group);
         if (!$deleted_image) {
             echo json_encode(
                 array(

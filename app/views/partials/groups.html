@@ -12,11 +12,13 @@
     {% if groups is not null %}
         <table class="table table-striped">
             <tr>
-                <th>Groups</th>
+                <th>Group</th>
+                <th>Image count</th>
             </tr>
             {% for group in groups %}
                 <tr>
-                    <td><a href="/group/{{ group }}">{{ group }}</a></td>
+                    <td><a href="/group/{{ group['group'] }}">{{ group['group'] }}</a></td>
+                    <td>{{ group['count'] }}</td>
                 </tr>
             {% endfor %}
         </table>

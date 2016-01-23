@@ -32,7 +32,6 @@ class Group extends Auth_user
         ];
 
         $data = array_merge($data, $this->data); // merge with parent data
-
         $html = $this->renderer->render('partials/groups', $data);
         $this->response->setContent($html);
         echo $this->response->getContent();

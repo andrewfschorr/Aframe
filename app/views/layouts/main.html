@@ -21,7 +21,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                             {% for group in groups %}
-                                <li><a href="/group/{{ group }}">{{ group }}</a></li>
+                                <li><a href="/group/{{ group['group'] }}">{{ group['group'] }}</a></li>
                             {% endfor %}
                             </ul>
                         </li>

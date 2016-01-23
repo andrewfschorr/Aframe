@@ -15,7 +15,12 @@ class GroupModel extends DB
         $result = $this->connection->query("SELECT * FROM groups");
         while($row = $result->fetch_assoc())
         {
-            $groups[] = $row['group'];
+            //$groups[] = $row['group'];
+            $groups[] = array(
+                'group' => $row['group'],
+                'count' => $row['count'],
+            );
+
         }
 
         $result->free();

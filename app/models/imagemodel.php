@@ -52,14 +52,14 @@ class ImageModel extends DB
         $title = $image_params['title'];
         $location = $image_params['location'];
         $file_name = $image_params['image-file']['name'];
-        $image_type = $image_params['image_type'];
+        $group = $image_params['group'];
 
         if ($image_params['image-file']['size']) {
-            if(!is_dir(ROOT . "/public/assets/img/uploaded_images/$image_type")) {
-                mkdir(ROOT . "/public/assets/img/uploaded_images/$image_type");
+            if(!is_dir(ROOT . "/public/assets/img/uploaded_images/$group")) {
+                mkdir(ROOT . "/public/assets/img/uploaded_images/$group");
             }
 
-            $uploaded_image_location = ROOT . "/public/assets/img/uploaded_images/$image_type/$file_name";
+            $uploaded_image_location = ROOT . "/public/assets/img/uploaded_images/$group/$file_name";
 
             move_uploaded_file($image_params['image-file']['tmp_name'], $uploaded_image_location);
         } else {
@@ -68,18 +68,23 @@ class ImageModel extends DB
 
         $time = date('h:i:s');
         $date = date('Y-m-d');
-        $query = "INSERT INTO images (`title`, `group`, `location`, `file_location`, `file_name`, `date`, `time`) VALUES ('$title', '$image_type','$location', '$uploaded_image_location', '$file_name', '$date', '$time')";
-        $this->connection->query($query);
+        $query = "INSERT INTO images (`title`, `group`, `location`, `file_location`, `file_name`, `date`, `time`) VALUES ('$title', '$group','$location', '$uploaded_image_location', '$file_name', '$date', '$time'); ";
+        $query .= "UPDATE `groups` SET `count` = `count` + 1 WHERE `group`='$group';";
+        $this->connection->multi_query($query);
         if ($this->connection->error) {
             error_log($this->connection->error);
         }
     }
 
-    public function delete_image($image_id)
+    public function delete_image($image_id, $group)
     {
-        $query = "DELETE FROM images WHERE id='$image_id'";
-        $this->connection->query($query);
+        $query = "DELETE FROM images WHERE id='$image_id'; ";
+        $query .= "UPDATE `groups` SET `count` = `count` - 1 WHERE `group`='$group';";
+
+
+        $this->connection->multi_query($query);
         if ($this->connection->error) {
+            error_log($this->connection->error);
             return false;
         } else {
             return true;

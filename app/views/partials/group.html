@@ -27,15 +27,15 @@
                              <img style="max-width:120px;" src="/assets/img/uploaded_images/{{group}}/{{ image['file_name'] }}">
                         {% endif %}
                     </td>
-                    <td><button data-id="{{image['id']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button></td>
+                    <td><button data-id="{{image['id']}}" data-group="{{image['group']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button></td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-        <div class="alert alert-warning" role="alert">No photos yes :(</div>
-    {% endif %}
-        <!-- //put back -->
+        <div class="alert alert-warning" role="alert">No photos :(</div>
         <a href="#" data-id="{{group}}" class="btn btn-danger deleteGroup">Delete Group</a>
+    {% endif %}
+
 
     <h2>Add that new hotness</h2>
     <form enctype="multipart/form-data" action="/image" method="post">
@@ -47,7 +47,7 @@
             <label for="location">Location</label>
             <input type="text" name="location" class="form-control" placeholder="Location">
         </div>
-        <input type="hidden" name="image_type" value="{{group}}">
+        <input type="hidden" name="group" value="{{group}}">
         <div class="form-group">
             <label for="imageUpload">Image</label>
             <input type="file" id="image-file" name="image-file">
