@@ -25,12 +25,16 @@ AFRAME.todo = (function() {
             url: endpoint,
             type: 'DELETE',
             success: function(result) {
-                console.log(result);
-                // if (type === 'image') {
-                //     location.reload();
-                // } else {
-                //     window.location.href = '/';
-                // }
+                var response = JSON.parse(result);
+                if (response['type'] === 'group') {
+                    if (response['status'] === 'success') {
+                        window.location.href = '/';
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    window.location.reload();
+                }
             }
         });
     };

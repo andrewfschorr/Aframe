@@ -41,13 +41,25 @@ class Group extends Auth_user
     public function delete_group($id)
     {
         $group_name = $this->request->getParameter('id', $defaultValue = null);
-        $group_thing = $this->group_model->delete_group($group_name);
+        $group_delete = $this->group_model->delete_group($group_name);
 
-        if (!$group_thing) {
+        if (!$group_delete) {
             Util::set_session('error_msg', 'Sorry, can\'t delete a non-empty group');
-            Util::redirect_and_exit($this->request->getReferer());
+            echo json_encode(
+                array(
+                    'status'  => 'error',
+                    'type'    => 'group',
+                    'message' => '',
+                )
+            );
         } else {
-            Util::redirect_and_exit(Util::get_server_name());
+            echo json_encode(
+                array(
+                    'status'  => 'success',
+                    'type'    => 'group',
+                    'message' => '',
+                )
+            );
         }
     }
 

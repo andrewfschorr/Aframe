@@ -79,5 +79,10 @@ class ImageModel extends DB
     {
         $query = "DELETE FROM images WHERE id='$image_id'";
         $this->connection->query($query);
+        if ($this->connection->error) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
