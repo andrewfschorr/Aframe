@@ -29,8 +29,9 @@ class GroupModel extends DB
 
     public function add_group($group)
     {
-        $query = "INSERT INTO groups (`group`) VALUES ('$group')";
-        return $this->connection->query($query);
+        $query = $this->connection->prepare("INSERT INTO groups (`group`) VALUES (?)");
+        $query->bind_param('s', $group);
+        return $query->execute();
     }
 
     public function delete_group($group)
@@ -50,12 +51,6 @@ class GroupModel extends DB
     {
         $query = "SELECT * FROM `groups` WHERE `group` ='$group'";
         $result = $this->connection->query($query);
-        error_log('fuck');
-        error_log(print_r($result, true));
-        if ($result->num_rows > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($result->num_rows > 0) ? true : false;
     }
 }

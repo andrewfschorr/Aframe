@@ -31,13 +31,18 @@ class ImageModel extends DB
 
         while($row = $results->fetch_assoc())
         {
+            $group = $row['group'];
+            $file_name = $row['file_name'];
+            $public_fp = "/assets/img/uploaded_images/$group/$file_name";
+
             $images[] = array(
                 'id'   => $row['id'],
                 'title' => $row['title'],
-                'group' => $row['group'],
+                'group' => $group,
                 'location' => $row['location'],
                 'file_location' => $row['file_location'],
-                'file_name' => $row['file_name'],
+                'public_fp' => $public_fp,
+                'file_name' => $file_name,
                 'time' => $row['time'],
                 'date' => $row['date'],
             );

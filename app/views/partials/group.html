@@ -24,7 +24,7 @@
                     <td>{{ image['group'] }}</td>
                     <td>
                         {% if image['file_location'] %}
-                             <img style="max-width:120px;" src="/assets/img/uploaded_images/{{group}}/{{ image['file_name'] }}">
+                             <img style="max-width:120px;" src="{{ image['public_fp'] }}">
                         {% endif %}
                     </td>
                     <td><button data-id="{{image['id']}}" data-group="{{image['group']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button></td>
