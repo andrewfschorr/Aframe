@@ -33,7 +33,7 @@ class ImageModel extends DB
         {
             $group = $row['group'];
             $file_name = $row['file_name'];
-            $public_fp = "/assets/img/uploaded_images/$group/$file_name";
+            $public_fp = "/public/assets/img/uploaded_images/$group/$file_name";
 
             $images[] = array(
                 'id'   => $row['id'],
