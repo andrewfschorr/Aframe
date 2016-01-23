@@ -45,4 +45,17 @@ class GroupModel extends DB
             return true;
         }
     }
+
+    public function group_exists($group)
+    {
+        $query = "SELECT * FROM `groups` WHERE `group` ='$group'";
+        $result = $this->connection->query($query);
+        error_log('fuck');
+        error_log(print_r($result, true));
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

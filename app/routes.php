@@ -11,7 +11,8 @@ return [
     ['POST', '/image',          ['Image', 'add_image']],
     ['DELETE', '/image',        ['Image', 'delete_image']],
 
-    ['GET', '/api/todo',        ['Api', 'todos']],
+    ['GET', '/api/groups',      ['Api', 'groups']],
+    ['GET', '/api/group/{group}',       ['Api', 'group_images']],
 
     ['GET', '/signup',          ['Authorization', 'show_signup']],
     ['POST', '/signup',         ['Authorization', 'signup']],

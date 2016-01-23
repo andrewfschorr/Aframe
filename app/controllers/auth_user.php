@@ -23,16 +23,17 @@ class Auth_user
         $this->email = Util::get_session('email');
         $this->group_model = new GroupModel();
 
+        if (empty($this->user_id)) {
+            Util::set_session('error_msg', 'sorry');
+            Util::redirect_and_exit('/login');
+            return;
+        }
+
         $this->groups = $this->group_model->get_groups();
         $this->data = [
             'user_id' => isset($this->user_id) ? $this->user_id : null,
             'email' => isset($this->email) ? $this->email : null,
             'groups' => isset($this->groups) ? $this->groups : null,
         ];
-
-        if (empty($this->user_id)) {
-            Util::set_session('error_msg', 'sorry');
-            Util::redirect_and_exit('/login');
-        }
     }
 }
