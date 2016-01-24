@@ -1,3 +1,4 @@
 RewriteEngine On
+Options -Multiviews
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ public/index.php [QSA,L]
