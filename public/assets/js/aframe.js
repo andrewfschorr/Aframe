@@ -5,7 +5,6 @@ AFRAME.todo = (function() {
 
     var init = function() {
         $('.deleteGroup, .deleteImage').on('click', __deleteThing);
-
     };
 
     var __deleteThing = function(e){
