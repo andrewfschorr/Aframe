@@ -44,5 +44,4 @@ AFRAME.todo = (function() {
 
 })();
 
-
 AFRAME.todo.init();
