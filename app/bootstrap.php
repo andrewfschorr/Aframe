@@ -16,7 +16,7 @@ foreach ($response->getHeaders() as $header) {
     header($header, false);
 }
 
-if (strpos(Util::getFullUrl(), '.dev')) {
+if (strpos($_SERVER['HTTP_HOST'], '.dev')) {
     ini_set('display_errors',1);
     error_reporting(E_ALL);
     define('ENV', 'dev');
