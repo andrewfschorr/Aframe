@@ -30,6 +30,7 @@ AFRAME.todo = (function() {
                         window.location.href = '/';
                     } else {
                         window.location.reload();
+
                     }
                 } else {
                     window.location.reload();
