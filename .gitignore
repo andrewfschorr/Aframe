@@ -1,4 +1,5 @@
 .DS_Store
 composer.lock
+/vendor
 public/assets/img/uploaded_images/*
 !public/assets/img/uploaded_images/.placeholder
