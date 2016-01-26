@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace Aframe\Models;
 
-class Usermodel extends DB
+class Usermodel extends Db
 {
     public function __construct()
     {
@@ -21,6 +21,6 @@ class Usermodel extends DB
 
     public function find_user($email)
     {
-        return $this->connection->query("SELECT * FROM users WHERE email = '$email'");   
+        return $this->connection->query("SELECT * FROM users WHERE email = '$email'");
     }
 }

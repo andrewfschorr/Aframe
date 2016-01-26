@@ -2,7 +2,7 @@
 
 namespace Aframe\Models;
 
-class GroupModel extends DB
+class GroupModel extends Db
 {
     public function __construct()
     {

@@ -4,7 +4,7 @@ namespace Aframe\Models;
 
 use Mysqli;
 
-class DB
+class Db
 {
     public function __construct()
     {

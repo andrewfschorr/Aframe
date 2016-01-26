@@ -2,7 +2,7 @@
 
 namespace Aframe\Models;
 
-class ImageModel extends DB
+class ImageModel extends Db
 {
     public function __construct()
     {
