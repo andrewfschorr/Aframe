@@ -1,6 +1,9 @@
 <?php
 
 namespace Aframe;
+use Aframe\Utils\Util;
+
+require ROOT . '/vendor/autoload.php';
 
 if (strpos(Util::getFullUrl(), '.dev')) {
     ini_set('display_errors',1);
@@ -8,10 +11,9 @@ if (strpos(Util::getFullUrl(), '.dev')) {
     define('ENV', 'dev');
 }
 
-require ROOT . '/vendor/autoload.php';
 require ROOT . '/config/config.php';
 
-use Aframe\Utils\Util;
+
 
 $injector = include('dependencies.php');
 
