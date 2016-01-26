@@ -27,13 +27,13 @@ if (strpos(Util::getFullUrl(), '.dev')) {
 */
 $whoops = new \Whoops\Run;
 
-if (ENV === 'dev') {
+// if (ENV === 'dev') {
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-} else {
-    $whoops->pushHandler(function($e){
-        echo 'Friendly error page and send an email to the developer';
-    });
-}
+// } else {
+    // $whoops->pushHandler(function($e){
+    //     echo 'Friendly error page and send an email to the developer';
+    // });
+//}
 
 $whoops->register();
 
