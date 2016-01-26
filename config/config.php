@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('America/New_York');
 
-if (ENV === 'dev') {
+if ( defined('ENV') && (ENV === 'dev')) {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
     define('DB_PASS', 'root');
