@@ -2,10 +2,10 @@
 
 namespace Aframe;
 
-use Aframe\Utils\Util;
-
 require ROOT . '/vendor/autoload.php';
 require ROOT . '/config/config.php';
+
+use Aframe\Utils\Util;
 
 $injector = include('dependencies.php');
 
