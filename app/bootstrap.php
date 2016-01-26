@@ -2,6 +2,12 @@
 
 namespace Aframe;
 
+if (strpos(Util::getFullUrl(), '.dev')) {
+    ini_set('display_errors',1);
+    error_reporting(E_ALL);
+    define('ENV', 'dev');
+}
+
 require ROOT . '/vendor/autoload.php';
 require ROOT . '/config/config.php';
 
@@ -14,12 +20,6 @@ $response = $injector->make('Http\HttpResponse');
 
 foreach ($response->getHeaders() as $header) {
     header($header, false);
-}
-
-if (strpos(Util::getFullUrl(), '.dev')) {
-    ini_set('display_errors',1);
-    error_reporting(E_ALL);
-    define('ENV', 'dev');
 }
 
 /**
