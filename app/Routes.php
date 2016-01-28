@@ -13,6 +13,7 @@ return [
 
     ['GET', '/api/groups',          ['Api', 'groups']],
     ['GET', '/api/group/{group}',   ['Api', 'group_images']],
+    ['GET', '/api/images',          ['Api', 'all_images']],
 
     ['GET', '/signup',              ['Authorization', 'show_signup']],
     ['POST', '/signup',             ['Authorization', 'signup']],

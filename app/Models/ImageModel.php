@@ -19,7 +19,11 @@ class ImageModel extends Db
     {
         $images = array();
         $result = $this->connection->query("SELECT * FROM images");
-        return $this->format_results($result);
+        if ($this->connection->error) {
+            return false;
+        } else {
+            return $this->format_results($result);
+        }
     }
 
     private function format_results($results)

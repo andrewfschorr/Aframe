@@ -13,18 +13,19 @@ class GroupModel extends Db
     {
         $groups = array();
         $result = $this->connection->query("SELECT * FROM groups");
-        while($row = $result->fetch_assoc())
-        {
-            //$groups[] = $row['group'];
-            $groups[] = array(
-                'group' => $row['group'],
-                'count' => $row['count'],
-            );
-
+        if ($this->connection->error) {
+            return false;
+        } else {
+            while($row = $result->fetch_assoc())
+            {
+                $groups[] = array(
+                    'group' => $row['group'],
+                    'count' => $row['count'],
+                );
+            }
+            $result->free();
+            return $groups;
         }
-
-        $result->free();
-        return $groups;
     }
 
     public function add_group($group)

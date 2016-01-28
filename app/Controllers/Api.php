@@ -16,7 +16,19 @@ class Api
 
     public function groups()
     {
-        echo json_encode($this->group_model->get_groups());
+        $group = $this->group_model->get_groups();
+        if ($group) {
+            $response = array(
+                'status' => 200,
+                'groups' => $group,
+            );
+        } else {
+            $response = array(
+                'status' => 500
+            );
+        }
+
+        echo json_encode($response);
     }
 
     public function group_images($response_params)
@@ -24,15 +36,24 @@ class Api
         $group_name = $response_params['group'];
         $group = $this->group_model->group_exists($group_name);
         if (!$group) {
-            http_response_code(404);
-            echo json_encode(array('status' => 404));
+            http_response_code(500);
+            echo json_encode(array('status' => 500));
         } else {
             $image_model = new ImageModel();
             echo json_encode(array(
                 'status' => 200,
                 'images' => $image_model->get_images($group_name),
             ));
-            //echo json_encode($image_model->get_images($group_name));
         }
+    }
+
+    public function all_images()
+    {
+        $image_model = new ImageModel();
+        $images = $image_model->get_all_images();
+        echo json_encode(array(
+            'status' => 200,
+            'images' => $images,
+        ));
     }
 }

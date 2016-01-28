@@ -13,3 +13,7 @@ CREATE TABLE `images` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+
+
+#alter table chatuser  add column activerecord bool;
+#`column1` tinyint(1) DEFAULT NULL
