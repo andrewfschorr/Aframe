@@ -10,10 +10,9 @@ CREATE TABLE `images` (
     `file_name` text,
     `date` date NOT NULL,
     `time` time NOT NULL,
+    `featured` tinyint(1) DEFAULT 0,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 
-
-#alter table chatuser  add column activerecord bool;
-#`column1` tinyint(1) DEFAULT NULL
+ALTER TABLE `images` ADD `featured` tinyint(1) DEFAULT 0

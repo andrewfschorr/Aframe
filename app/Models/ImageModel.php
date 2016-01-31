@@ -40,15 +40,16 @@ class ImageModel extends Db
             $public_fp = "/public/assets/img/uploaded_images/$group/$file_name";
 
             $images[] = array(
-                'id'   => $row['id'],
-                'title' => $row['title'],
-                'group' => $group,
-                'location' => $row['location'],
+                'id'            => $row['id'],
+                'title'         => $row['title'],
+                'group'         => $group,
+                'location'      => $row['location'],
                 'file_location' => $row['file_location'],
-                'public_fp' => $public_fp,
-                'file_name' => $file_name,
-                'time' => $row['time'],
-                'date' => $row['date'],
+                'public_fp'     => $public_fp,
+                'file_name'     => $file_name,
+                'featured'      => $row['featured'],
+                'time'          => $row['time'],
+                'date'          => $row['date'],
             );
         }
 
@@ -89,14 +90,34 @@ class ImageModel extends Db
     {
         $query = "DELETE FROM images WHERE id='$image_id'; ";
         $query .= "UPDATE `groups` SET `count` = `count` - 1 WHERE `group`='$group';";
-
-
         $this->connection->multi_query($query);
         if ($this->connection->error) {
             error_log($this->connection->error);
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function feature_image($group_name, $id, $featured_status)
+    {
+        $this->connection->query("UPDATE images SET featured = '$featured_status' WHERE `group`='$group_name' AND `id`= '$id';");
+        if ($this->connection->error) {
+            error_log($this->connection->error);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function get_featured_images()
+    {
+        $images = $this->connection->query("SELECT * FROM `images` WHERE `featured` = 1");
+        if ($this->connection->error) {
+            error_log($this->connection->error);
+            return false;
+        } else {
+            return $this->format_results($images);
         }
     }
 }

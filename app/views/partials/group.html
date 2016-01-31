@@ -9,25 +9,31 @@
     <h1>{{group}}</h1>
 
     {% if images is not null %}
-        <table class="table table-striped">
+        <table class="table table-striped image-table">
             <tr>
                 <th>Title</th>
                 <th>Location</th>
-                <th>Image Type</th>
+                <!-- <th>Image Type</th> -->
                 <th>Thumbnail</th>
+                <th>Feature</th>
                 <th>Delete</th>
             </tr>
             {% for image in images %}
                 <tr>
                     <td>{{ image['title'] }}</td>
                     <td>{{ image['location'] }}</td>
-                    <td>{{ image['group'] }}</td>
+                    <!-- <td>{{ image['group'] }}</td> -->
                     <td>
                         {% if image['file_location'] %}
                              <img style="max-width:120px;" src="{{ image['public_fp'] }}">
                         {% endif %}
                     </td>
-                    <td><button data-id="{{image['id']}}" data-group="{{image['group']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button></td>
+                    <td>
+                        <button type="button" data-id="{{image['id']}}" data-group="{{image['group']}}" class="btn-xs btn featureButton {{ image['featured'] ? 'btn-success' : 'btn-primary' }}" data-toggle="button" aria-pressed="false" autocomplete="off">Feature</button>
+                    </td>
+                    <td>
+                        <button data-id="{{image['id']}}" data-group="{{image['group']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
@@ -36,24 +42,24 @@
         <a href="#" data-id="{{group}}" class="btn btn-danger deleteGroup">Delete Group</a>
     {% endif %}
 
-
-    <h2>Add that new hotness</h2>
-    <form enctype="multipart/form-data" action="/image" method="post">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Title">
-        </div>
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" name="location" class="form-control" placeholder="Location">
-        </div>
-        <input type="hidden" name="group" value="{{group}}">
-        <div class="form-group">
-            <label for="imageUpload">Image</label>
-            <input type="file" id="image-file" name="image-file">
-            <p class="help-block">Upload your image!</p>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-
+    <div class="small-form">
+        <h2>Add that new hotness</h2>
+        <form enctype="multipart/form-data" action="/image" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" name="location" class="form-control" placeholder="Location">
+            </div>
+            <input type="hidden" name="group" value="{{group}}">
+            <div class="form-group">
+                <label for="imageUpload">Image</label>
+                <input type="file" id="image-file" name="image-file">
+                <p class="help-block">Upload your image!</p>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
 {% endblock %}

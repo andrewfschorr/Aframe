@@ -6,32 +6,32 @@
             <strong>Uh oh!</strong> {{error}}
         </div>
     {% endif %}
-
-    <h2>Groups</h2>
-
-    {% if groups is not null %}
-        <table class="table table-striped">
-            <tr>
-                <th>Group</th>
-                <th>Image count</th>
-            </tr>
-            {% for group in groups %}
+    <div class="small-form">
+        <h2>Groups</h2>
+        {% if groups is not null %}
+            <table class="table table-striped">
                 <tr>
-                    <td><a href="/group/{{ group['group'] }}">{{ group['group'] }}</a></td>
-                    <td>{{ group['count'] }}</td>
+                    <th>Group</th>
+                    <th>Image count</th>
                 </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <div class="alert alert-warning" role="alert">Sorry man, no groups yet.</div>
-    {% endif %}
+                {% for group in groups %}
+                    <tr>
+                        <td><a href="/group/{{ group['group'] }}">{{ group['group'] }}</a></td>
+                        <td>{{ group['count'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">Sorry man, no groups yet.</div>
+        {% endif %}
 
-    <h3>Add a group</h3>
-    <form action="/group" method="post">
-        <div class="form-group">
-            <label for="group">group</label>
-            <input type="text" name="group" class="form-control" placeholder="group">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+        <h3>Add a group</h3>
+        <form action="/group" method="post">
+            <div class="form-group">
+                <label for="group">group</label>
+                <input type="text" name="group" class="form-control" placeholder="group">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
 {% endblock %}

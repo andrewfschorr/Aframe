@@ -62,6 +62,17 @@ class Image extends Auth_user
                 )
             );
         }
+    }
 
+    public function feature_image()
+    {
+        $group_name = $this->request->getParameter('group', $defaultValue = null);
+        $id = $this->request->getParameter('id', $defaultValue = null);
+        $chage_featured_status_to = $this->request->getParameter('changeStatus', $defaultValue = null);
+        $feature_image = $this->image_model->feature_image($group_name, $id, $chage_featured_status_to);
+        $status = $feature_image ? 'success' : 'fail';
+        echo json_encode(
+            array('status'  => $status)
+        );
     }
 }

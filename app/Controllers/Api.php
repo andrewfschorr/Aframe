@@ -56,4 +56,17 @@ class Api
             'images' => $images,
         ));
     }
+
+    public function featured_images()
+    {
+        $image_model = new ImageModel();
+        $images = $image_model->get_featured_images();
+
+        $status = ($images) ? 200 : 500;
+
+        echo json_encode(array(
+            'status' => $status,
+            'images' => $images,
+        ));
+    }
 }

@@ -5,6 +5,25 @@ AFRAME.todo = (function() {
 
     var init = function() {
         $('.deleteGroup, .deleteImage').on('click', __deleteThing);
+        $('.featureButton', '.image-table').on('click', __featureImage);
+    };
+
+    var __featureImage = function(e) {
+        var $btn = $(this);
+        var isFeatured = $btn.hasClass('btn-primary');
+        var id = $btn.data('id');
+        var group = $btn.data('group');
+        var changeFeaturedStatusTo = !isFeatured ? 0 : 1;
+        $.ajax({
+            url: '/feature-image?group=' + group + '&id=' + id + '&changeStatus=' + changeFeaturedStatusTo,
+            type: 'POST',
+            success: function(result) {
+                var response = JSON.parse(result);
+                if (response.status === 'success') {
+                    $btn.toggleClass('btn-primary', !isFeatured).toggleClass('btn-success', isFeatured);
+                }
+            }
+        });
     };
 
     var __deleteThing = function(e){
@@ -30,7 +49,6 @@ AFRAME.todo = (function() {
                         window.location.href = '/';
                     } else {
                         window.location.reload();
-
                     }
                 } else {
                     window.location.reload();
