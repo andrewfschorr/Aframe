@@ -32,7 +32,7 @@
                         <button type="button" data-id="{{image['id']}}" data-group="{{image['group']}}" class="btn-xs btn featureButton {{ image['featured'] ? 'btn-success' : 'btn-primary' }}" data-toggle="button" aria-pressed="false" autocomplete="off">Feature</button>
                     </td>
                     <td>
-                        <button data-id="{{image['id']}}" data-group="{{image['group']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button>
+                        <button data-id="{{image['id']}}" data-group="{{image['group']}}" data-file-name="{{image['file_name']}}" type="button" class="deleteImage btn btn-danger btn-xs">Delete</button>
                     </td>
                 </tr>
             {% endfor %}

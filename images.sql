@@ -14,5 +14,3 @@ CREATE TABLE `images` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-
-ALTER TABLE `images` ADD `featured` tinyint(1) DEFAULT 0

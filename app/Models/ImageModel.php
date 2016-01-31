@@ -50,6 +50,7 @@ class ImageModel extends Db
                 'featured'      => $row['featured'],
                 'time'          => $row['time'],
                 'date'          => $row['date'],
+                'file_name'     => $row['file_name'],
             );
         }
 

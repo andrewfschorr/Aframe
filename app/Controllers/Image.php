@@ -42,9 +42,10 @@ class Image extends Auth_user
 
     public function delete_image()
     {
-        $image_id = $this->request->getParameter('id', $defaultValue = null);
-        $group = $this->request->getParameter('group', $defaultValue = null);
-        $deleted_image = $this->image_model->delete_image($image_id, $group);
+        $request_params = $this->request->getParameters() ;
+        $deleted_image = $this->image_model->delete_image($request_params['id'], $request_params['group']);
+        $file_name = $request_params['fileName'];
+        $group = $request_params['group'];
         if (!$deleted_image) {
             echo json_encode(
                 array(
@@ -54,6 +55,10 @@ class Image extends Auth_user
                 )
             );
         } else {
+            // delte the file
+            if($file_name) {
+                unlink(ROOT . "/public/assets/img/uploaded_images/$group/$file_name");
+            }
             echo json_encode(
                 array(
                     'status'  => 'success',

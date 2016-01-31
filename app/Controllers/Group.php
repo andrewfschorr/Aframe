@@ -52,6 +52,7 @@ class Group extends Auth_user
                 )
             );
         } else {
+            rmdir(ROOT . "/public/assets/img/uploaded_images/$group_name");
             echo json_encode(
                 array(
                     'status'  => 'success',
