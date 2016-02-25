@@ -67,7 +67,6 @@ class ImageModel extends Db
 
         if ($image_params['image-file']['size']) {
             if(!is_dir(ROOT . "/public/assets/img/uploaded_images/$group")) {
-                error_log('making new directory at: ' . ROOT . "/public/assets/img/uploaded_images/$group");
                 mkdir(ROOT . "/public/assets/img/uploaded_images/$group", 755, true);
             }
 
