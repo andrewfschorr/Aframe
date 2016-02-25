@@ -37,9 +37,11 @@ class Group extends Auth_user
         echo $this->response->getContent();
     }
 
-    public function delete_group($id)
+    public function delete_group()
     {
-        $group_name = $this->request->getParameter('id', $defaultValue = null);
+        $request_params = $this->request->getParameters();
+        $group_name = $request_params['id'];
+
         $group_delete = $this->group_model->delete_group($group_name);
 
         if (!$group_delete) {
@@ -52,7 +54,9 @@ class Group extends Auth_user
                 )
             );
         } else {
-            rmdir(ROOT . "/public/assets/img/uploaded_images/$group_name");
+            if (is_dir(ROOT . "/public/assets/img/uploaded_images/$group_name")) {
+                rmdir(ROOT . "/public/assets/img/uploaded_images/$group_name");
+            }
             echo json_encode(
                 array(
                     'status'  => 'success',

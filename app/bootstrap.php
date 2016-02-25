@@ -34,7 +34,9 @@ $whoops = new \Whoops\Run;
 if (defined('ENV') && ENV === 'dev') {
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 } else {
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->pushHandler(function($e){
+        echo 'Whoops. Something\s wrong...';
+    });
 }
 
 $whoops->register();
