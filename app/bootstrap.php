@@ -9,6 +9,8 @@ if (strpos(Util::getFullUrl(), '.dev')) {
     ini_set('display_errors',1);
     error_reporting(E_ALL);
     define('ENV', 'dev');
+} else {
+    define('ENV', 'prod');
 }
 
 require ROOT . '/config/config.php';
