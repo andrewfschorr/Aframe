@@ -29,7 +29,7 @@ foreach ($response->getHeaders() as $header) {
 */
 $whoops = new \Whoops\Run;
 
-if (ENV === 'dev') {
+if (defined('ENV') && ENV === 'dev') {
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 } else {
     $whoops->pushHandler(function($e){
